@@ -17,32 +17,32 @@ function productDetailsTemplate(product) {
 
 export default class ProductDetails {
 
-constructor(productId, dataSource){
-    this.productId = productId;
-    this.product = {};
-    this.dataSource = dataSource;
-}
-
-async init() {
-    this.product = await this.dataSource.findProductById(this.productId);
-    this.renderProductDetails("main");
-      // add listener to Add to Cart button
-    document
-        .getElementById("addProductToCart") //added 'Product' - addToCart original
-        .addEventListener("click", addToCartHandler);
-}
-
-addProductToCart() {
-    setLocalStorage("so-cart", this.product);
-}
-
-renderProductDetails(selector) {
-    const element = document.querySelector(selector);
-    element.insertAdjacentHTML(
-        "afterBegin",
-        productDetailsTemplate(this.product)
-    );
-}
+    constructor(productId, dataSource){
+        this.productId = productId;
+        this.product = {};
+        this.dataSource = dataSource;
+    }
+    
+    async init() {
+        this.product = await this.dataSource.findProductById(this.productId);
+        this.renderProductDetails("main");
+          // add listener to Add to Cart button
+        document
+            .getElementById("addProductToCart") //added 'Product' - addToCart original
+            .addEventListener("click", addToCartHandler);
+    }
+    
+    addProductToCart() {
+        setLocalStorage("so-cart", this.product);
+    }
+    
+    renderProductDetails(selector) {
+        const element = document.querySelector(selector);
+        element.insertAdjacentHTML(
+            "afterBegin",
+            productDetailsTemplate(this.product)
+        );
+    }
 }
 
  // create a list/array for the cart
