@@ -12,7 +12,7 @@ function productListingTemplate(products) {
         </li>
     `);
 
-  
+
     return productHTMLTemplates.join('');
 }
 
@@ -25,10 +25,10 @@ export default class ProductListing {
     
     getData() {
         return fetch(this.path)
-          .then(convertToJson)
-          .then((data) => data);
+            .then(convertToJson)
+            .then((data) => data);
     }
- 
+
     renderProductList(list) {
         const element = document.querySelector(this.listElement)
         element.insertAdjacentHTML("afterbegin", productListingTemplate(list))
