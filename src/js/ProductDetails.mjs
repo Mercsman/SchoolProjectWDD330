@@ -1,4 +1,3 @@
-import { doc } from "prettier";
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
