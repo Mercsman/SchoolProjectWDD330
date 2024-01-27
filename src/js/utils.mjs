@@ -13,14 +13,6 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
-// set a listener for both touchend and click
-export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
-    event.preventDefault();
-    callback();
-  });
-  qs(selector).addEventListener("click", callback);
-}
 
 export function getParam(param) {
   const queryString = window.location.search;
@@ -58,12 +50,20 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerTemplate = await loadTemplate("/src/public/partials/header.html");
   const headerElement = document.querySelector("#main-header");
-  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerTemplate = await loadTemplate("/src/public/partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
 
+// set a listener for both touchend and click
+export function setClick(selector, callback) {
+  qs(selector).addEventListener("touchend", (event) => {
+    event.preventDefault();
+    callback();
+  });
+  qs(selector).addEventListener("click", callback);
+}
