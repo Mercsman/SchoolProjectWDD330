@@ -43,16 +43,18 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
-export async function loadTemplate(path) {
+// Testing removing 'export' from below function
+async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
   return template;
 }
 
+// testing changing '/src/public/partials' to just '../partials'
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("/src/public/partials/header.html");
+  const headerTemplate = await loadTemplate("../partials/header.html");
   const headerElement = document.querySelector("#main-header");
-  const footerTemplate = await loadTemplate("/src/public/partials/footer.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(headerTemplate, headerElement);
@@ -66,4 +68,26 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+}
+
+// Alert message function
+export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert= document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+  
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  if (scroll)
+    window.scrollTo(0,0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
